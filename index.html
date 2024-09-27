@@ -9,7 +9,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/apps/audiobookshelf/css/audiobookshelf.css?v=6.0.1&"
+      href="/apps/audiobookshelf/css/index.css?v=6.0.1&"
     />
     <script>
       window.top.UNAS.SetAppState('Audiobookshelf', 'active')
@@ -35,8 +35,14 @@
       })()
 
       function getConfig() {
-        jQuery('#audiobookshelf_manager_waiting_content').attr('style', 'display:block')
-        jQuery('#audiobookshelf_manager_waiting_logo').attr('style', 'display:block')
+        jQuery('#audiobookshelf_manager_waiting_content').attr(
+          'style',
+          'display:block'
+        )
+        jQuery('#audiobookshelf_manager_waiting_logo').attr(
+          'style',
+          'display:block'
+        )
         jQuery.ajax({
           url: '/apps/audiobookshelf/includes/services.php',
           type: 'POST',
@@ -77,35 +83,54 @@
 
               var shareFolders = data.shareFolders
               var selectFolder = data.configDir
-              if(data.homesAppsFolder && data.homesAppsFolder !== "") {
-                if(shareFolders) {
+              if (
+                data.homesExtConfigFolder &&
+                data.homesExtConfigFolder !== ''
+              ) {
+                if (shareFolders) {
                   shareFolders.unshift({
-                    path: data.homesAppsFolder
+                    path: data.homesExtConfigFolder,
                   })
                 } else {
-                  shareFolders = [{
-                    path: data.homesAppsFolder
-                  }]
+                  shareFolders = [
+                    {
+                      path: data.homesExtConfigFolder,
+                    },
+                  ]
                 }
-                if(selectFolder === null || selectFolder === undefined || selectFolder === '') {
-                  selectFolder = data.homesAppsFolder
+                if (
+                  selectFolder === null ||
+                  selectFolder === undefined ||
+                  selectFolder === ''
+                ) {
+                  selectFolder = data.homesExtConfigFolder
                 }
               }
-              var shareFolderAvail = share_folder_list('audiobookshelf_config_dir', shareFolders, selectFolder)
+              var shareFolderAvail = share_folder_list(
+                'audiobookshelf_config_dir',
+                shareFolders,
+                selectFolder
+              )
 
               jQuery('#audiobookshelf_port').val(data.port)
 
               if (shareFolderAvail) {
                 jQuery('#audiobookshelf_apply').attr('class', 'unas_button')
               } else {
-                jQuery('#audiobookshelf_apply').attr('class', 'unas_button_disabled')
+                jQuery('#audiobookshelf_apply').attr(
+                  'class',
+                  'unas_button_disabled'
+                )
               }
             }
             jQuery('#audiobookshelf_manager_waiting_content').attr(
               'style',
               'display:none'
             )
-            jQuery('#audiobookshelf_manager_waiting_logo').attr('style', 'display:none')
+            jQuery('#audiobookshelf_manager_waiting_logo').attr(
+              'style',
+              'display:none'
+            )
           },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert(textStatus)
@@ -113,7 +138,10 @@
               'style',
               'display:none'
             )
-            jQuery('#audiobookshelf_manager_waiting_logo').attr('style', 'display:none')
+            jQuery('#audiobookshelf_manager_waiting_logo').attr(
+              'style',
+              'display:none'
+            )
           },
         })
       }
@@ -121,12 +149,16 @@
       function audiobookshelfCheckPortFunc() {
         if (audiobookshelfCheckPort())
           jQuery('#audiobookshelf_apply').attr('class', 'unas_button')
-        else jQuery('#audiobookshelf_apply').attr('class', 'unas_button_disabled')
+        else
+          jQuery('#audiobookshelf_apply').attr('class', 'unas_button_disabled')
       }
 
       function audiobookshelfCheckPort() {
         var portState = false
-        var port = parseInt(jQuery.trim(jQuery('#audiobookshelf_port').val()), 10)
+        var port = parseInt(
+          jQuery.trim(jQuery('#audiobookshelf_port').val()),
+          10
+        )
         if (isNaN(port)) {
           jQuery('#audiobookshelf_port').val('')
         } else {
@@ -139,7 +171,10 @@
           jQuery('#audiobookshelf_port_warning').html('')
           portState = true
         } else if (port > 65535 || port < 1) {
-          jQuery('#audiobookshelf_port_warning').attr('class', 'input_warning_info')
+          jQuery('#audiobookshelf_port_warning').attr(
+            'class',
+            'input_warning_info'
+          )
           jQuery('#audiobookshelf_port_warning').attr(
             'title',
             UNAS._('Port should between 1 and 65535')
@@ -149,7 +184,7 @@
           )
         } else {
           jQuery.ajax({
-            url: '/apps/ddns-go/includes/services.php',
+            url: '/apps/audiobookshelf/includes/services.php',
             type: 'POST',
             async: false,
             contentType: 'application/json',
@@ -166,10 +201,18 @@
                   'class',
                   'input_warning_info'
                 )
-                jQuery('#audiobookshelf_port_warning').attr('title', UNAS._(data.msg))
-                jQuery('#audiobookshelf_port_warning').html('* ' + UNAS._(data.msg))
+                jQuery('#audiobookshelf_port_warning').attr(
+                  'title',
+                  UNAS._(data.msg)
+                )
+                jQuery('#audiobookshelf_port_warning').html(
+                  '* ' + UNAS._(data.msg)
+                )
               } else {
-                jQuery('#audiobookshelf_port_warning').attr('class', 'input_warning')
+                jQuery('#audiobookshelf_port_warning').attr(
+                  'class',
+                  'input_warning'
+                )
                 jQuery('#audiobookshelf_port_warning').attr('title', '')
                 jQuery('#audiobookshelf_port_warning').html('')
                 portState = true
@@ -199,8 +242,14 @@
         if (jQuery('#audiobookshelf_apply').hasClass('unas_button_disabled')) {
           return false
         }
-        jQuery('#audiobookshelf_manager_waiting_content').attr('style', 'display:block')
-        jQuery('#audiobookshelf_manager_waiting_logo').attr('style', 'display:block')
+        jQuery('#audiobookshelf_manager_waiting_content').attr(
+          'style',
+          'display:block'
+        )
+        jQuery('#audiobookshelf_manager_waiting_logo').attr(
+          'style',
+          'display:block'
+        )
 
         var enable = jQuery('#audiobookshelf_enable').prop('checked'),
           configDir = jQuery('#audiobookshelf_config_dir').val(),
@@ -226,7 +275,9 @@
                 'style',
                 'display:block;color: #333333'
               )
-              jQuery('#audiobookshelf_info').html(UNAS._('Operation successful'))
+              jQuery('#audiobookshelf_info').html(
+                UNAS._('Operation successful')
+              )
             } else {
               jQuery('#audiobookshelf_info').attr(
                 'style',
@@ -238,7 +289,10 @@
               'style',
               'display:none'
             )
-            jQuery('#audiobookshelf_manager_waiting_logo').attr('style', 'display:none')
+            jQuery('#audiobookshelf_manager_waiting_logo').attr(
+              'style',
+              'display:none'
+            )
             getConfig()
           },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -247,7 +301,10 @@
               'style',
               'display:none'
             )
-            jQuery('#audiobookshelf_manager_waiting_logo').attr('style', 'display:none')
+            jQuery('#audiobookshelf_manager_waiting_logo').attr(
+              'style',
+              'display:none'
+            )
           },
         })
       }
@@ -257,53 +314,63 @@
       }
 
       // 功能函数，缩略太长的字符串
-      function trunc(str, len){
-        if(str == null)
-          return '';
-        var str_length = 0;
-        var str_cut = new String();
-        for (var i = 0; i < str.length; i++){
-          a = str.charAt(i);
-          str_length++;
+      function trunc(str, len) {
+        if (str == null) return ''
+        var str_length = 0
+        var str_cut = new String()
+        for (var i = 0; i < str.length; i++) {
+          a = str.charAt(i)
+          str_length++
           if (escape(a).length > 4) {
-              str_length++;
+            str_length++
           }
-          str_cut = str_cut.concat(a);
+          str_cut = str_cut.concat(a)
           if (str_length > len) {
-            str_cut = str_cut.concat("...");
-            return str_cut;
+            str_cut = str_cut.concat('...')
+            return str_cut
           }
         }
         if (str_length <= len) {
-          return str;
+          return str
         }
       }
 
-      function share_folder_list(elementId, folders, folder_selected){
-        var folder_opts = "";
-        var selected = false;
-        var shareFolderAvail = false;
-        if (folders === null || folders === undefined || folders.length === 0){
+      function share_folder_list(elementId, folders, folder_selected) {
+        var folder_opts = ''
+        var selected = false
+        var shareFolderAvail = false
+        if (folders === null || folders === undefined || folders.length === 0) {
           // 没有共享文件夹可用
-          shareFolderAvail = false;
-          folder_opts = '<option value="">' + UNAS._("##$@audiobookshelf@$##Enable Home Dir or create a SHARE FOLDER before select##$@audiobookshelf@$##") + '</option>';
-        }else{
-          shareFolderAvail = true;
+          shareFolderAvail = false
+          folder_opts =
+            '<option value="">' +
+            UNAS._(
+              '##$@audiobookshelf@$##Enable Home Dir or create a SHARE FOLDER before select##$@audiobookshelf@$##'
+            ) +
+            '</option>'
+        } else {
+          shareFolderAvail = true
           for (var i = 0; i < folders.length; i++) {
-            var folderPath = folders[i].path;
-            folder_opts += '<option value="' + folderPath + '"' + ' title="' + folderPath + '"';
-            if (folderPath == folder_selected){
-              folder_opts += ' selected="selected"';
-              selected = true;
+            var folderPath = folders[i].path
+            folder_opts +=
+              '<option value="' +
+              folderPath +
+              '"' +
+              ' title="' +
+              folderPath +
+              '"'
+            if (folderPath == folder_selected) {
+              folder_opts += ' selected="selected"'
+              selected = true
             }
-            folder_opts += '>' + trunc(folderPath, 30) + '</option>';
+            folder_opts += '>' + trunc(folderPath, 30) + '</option>'
           }
         }
-        jQuery('#' + elementId).html(folder_opts);
-        if (shareFolderAvail && !selected){
-          jQuery('#'+elementId+' option:first').prop("selected", "selected");
+        jQuery('#' + elementId).html(folder_opts)
+        if (shareFolderAvail && !selected) {
+          jQuery('#' + elementId + ' option:first').prop('selected', 'selected')
         }
-        return shareFolderAvail;
+        return shareFolderAvail
       }
     </script>
   </head>
@@ -325,7 +392,9 @@
           class="unas_tab_sel"
           poweroptionsitemtableid="poweroptions_manager_immediately_page"
         >
-          <span>##$@audiobookshelf@$##Audiobookshelf##$@audiobookshelf@$##</span>
+          <span
+            >##$@audiobookshelf@$##Audiobookshelf##$@audiobookshelf@$##</span
+          >
         </div>
       </div>
       <div class="unas_content">
@@ -345,21 +414,35 @@
               <li class="unas_item_li" style="margin-bottom: 10px">
                 <span>
                   <div class="unas_checkbox">
-                    <input type="checkbox" id="audiobookshelf_enable" oldvalue="" />
+                    <input
+                      type="checkbox"
+                      id="audiobookshelf_enable"
+                      oldvalue=""
+                    />
                     <label for="audiobookshelf_enable"></label>
                   </div>
                 </span>
-                <span>##$@audiobookshelf@$##Enable Audiobookshelf Service##$@audiobookshelf@$##</span>
+                <span
+                  >##$@audiobookshelf@$##Enable Audiobookshelf
+                  Service##$@audiobookshelf@$##</span
+                >
               </li>
               <li class="unas_item_li" style="margin-bottom: 10px">
                 <span class="span_left" style="margin-left: 40px"
-                  >##$@audiobookshelf@$##Configuration Directory:##$@audiobookshelf@$##</span
+                  >##$@audiobookshelf@$##Configuration
+                  Directory:##$@audiobookshelf@$##</span
                 >
                 <span>
-                  <select class="unas_select" id="audiobookshelf_config_dir">
-                  </select>
+                  <select
+                    class="unas_select"
+                    id="audiobookshelf_config_dir"
+                  ></select>
                 </span>
-                <label class="" id="audiobookshelf_config_dir_warning" title=""></label>
+                <label
+                  class=""
+                  id="audiobookshelf_config_dir_warning"
+                  title=""
+                ></label>
               </li>
               <li class="unas_item_li" style="margin-bottom: 10px">
                 <span class="span_left" style="margin-left: 40px"
@@ -370,7 +453,11 @@
                     id="audiobookshelf_port"
                     name="audiobookshelf_input"
                     class="unas_input" /></span
-                ><label class="" id="audiobookshelf_port_warning" title=""></label>
+                ><label
+                  class=""
+                  id="audiobookshelf_port_warning"
+                  title=""
+                ></label>
               </li>
               <li class="unas_item_li" style="margin-bottom: 10px">
                 <span id="audiobookshelf_info" style="display: none"></span>
@@ -425,7 +512,8 @@
             node[p] = window.top.UNAS._(pageTranslators[i].originalText)
           }
           if (
-            jQuery('#audiobookshelf_port_warning').attr('class') == 'input_warning_info'
+            jQuery('#audiobookshelf_port_warning').attr('class') ==
+            'input_warning_info'
           ) {
             audiobookshelfCheckPort()
           }

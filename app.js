@@ -31,7 +31,7 @@ AudiobookshelfApp.App = function () {
       scrollbars: false,
       resizeLimit: { x: [200, 2000], y: [150, 1500] },
       contentURL: '/apps/audiobookshelf/index.html?v=6.0.1&',
-      require: { css: ['/apps/audiobookshelf/css/audiobookshelf.css'] },
+      require: { css: ['/apps/audiobookshelf/css/index.css'] },
       onBeforeBuild: function () {
         UNAS.SetAppOpenedWindow('Audiobookshelf', 'AudiobookshelfAppWindow')
       },
