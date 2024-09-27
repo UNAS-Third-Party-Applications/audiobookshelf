@@ -42,7 +42,7 @@ rsync -avrP --exclude='.history' --exclude='.git' --exclude='.gitkeep' --exclude
 # 创建程序目录
 mkdir -p "dist/debian/unas/apps/$SOFT_DIR"
 # 复制应用程序文件到dist/debian/unas/apps目录，用于实现程序的安装
-rsync -avrP --exclude='.history' --exclude='.git' --exclude='.gitkeep' --exclude='.gitignore' --exclude='.github' --exclude='build' --exclude='dist' ./ "./dist/debian/unas/apps/$SOFT_DIR"
+rsync -avrP --exclude='.history' --exclude='.git' --exclude='.gitkeep' --exclude='.gitignore' --exclude='build' --exclude='dist' ./ "./dist/debian/unas/apps/$SOFT_DIR"
 chmod -R 775 dist/debian
 
 # 替换DEBIAN目录中的各种处理脚本中的文件路径
