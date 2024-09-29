@@ -156,7 +156,7 @@ if($action == "getConfig") {
     'configDir' => $configDir,
     'port' => $port
   );
-  $result = saveManageConfig('/audiobookshelf', $manageConfigData);
+  $result = saveManageConfig($hmoesExtAppsFolder.'/audiobookshelf', $manageConfigData);
   if($result == false) {
     // 配置写入文件失败
     echo json_encode(array(
