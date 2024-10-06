@@ -10,6 +10,8 @@
                 [ "Port:", "audiobookshelf", "访问端口：" ],
                 [ "Start Audiobookshelf Service", "audiobookshelf", "启动Audiobookshelf服务" ],
                 [ "Stop Audiobookshelf Service", "audiobookshelf", "停止Audiobookshelf服务" ],
+                [ "Audiobookshelf Project", "audiobookshelf", "Audiobookshelf项目地址" ],
+                [ "Current Project", "audiobookshelf", "当前项目地址" ],
                 [ "Enable Home Dir or create a SHARE FOLDER before select","audiobookshelf", "请先启用home目录或者创建一个共享文件夹作为Audiobookshelf存储目录"],
                 [ "Please enable the home directory in the User Account before use","0", "使用套件前请先在用户账户应用中开启homes目录"],
                 [ "Port should between 1 and 65535", "0", "端口应该在1到65535之间" ],
