@@ -9,11 +9,11 @@ var AudiobookshelfApp = AudiobookshelfApp || {} //Define audiobookshelf App name
 AudiobookshelfApp.App = function () {
   this.id = 'Audiobookshelf'
   this.name = 'Audiobookshelf'
-  this.version = '6.0.2'
+  this.version = '6.0.3'
   this.active = false
-  this.menuIcon = '/apps/audiobookshelf/images/logo.png?v=6.0.2&'
-  this.shortcutIcon = '/apps/audiobookshelf/images/logo.png?v=6.0.2&'
-  this.entryUrl = '/apps/audiobookshelf/index.html?v=6.0.2&'
+  this.menuIcon = '/apps/audiobookshelf/images/logo.png?v=6.0.3&'
+  this.shortcutIcon = '/apps/audiobookshelf/images/logo.png?v=6.0.3&'
+  this.entryUrl = '/apps/audiobookshelf/index.html?v=6.0.3&'
   var self = this
   this.AudiobookshelfAppWindow = function () {
     if (UNAS.CheckAppState('Audiobookshelf')) {
@@ -22,7 +22,7 @@ AudiobookshelfApp.App = function () {
     self.window = new MUI.Window({
       id: 'AudiobookshelfAppWindow',
       title: UNAS._('Audiobookshelf'),
-      icon: '/apps/audiobookshelf/images/logo_small.png?v=6.0.2&',
+      icon: '/apps/audiobookshelf/images/logo_small.png?v=6.0.3&',
       loadMethod: 'xhr',
       width: 750,
       height: 480,
@@ -30,7 +30,7 @@ AudiobookshelfApp.App = function () {
       resizable: true,
       scrollbars: false,
       resizeLimit: { x: [200, 2000], y: [150, 1500] },
-      contentURL: '/apps/audiobookshelf/index.html?v=6.0.2&',
+      contentURL: '/apps/audiobookshelf/index.html?v=6.0.3&',
       require: { css: ['/apps/audiobookshelf/css/index.css'] },
       onBeforeBuild: function () {
         UNAS.SetAppOpenedWindow('Audiobookshelf', 'AudiobookshelfAppWindow')
